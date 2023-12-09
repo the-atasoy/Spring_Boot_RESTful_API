@@ -10,7 +10,6 @@ import lombok.ToString;
 @ToString
 public class Employee {
     private String name;
-    @JsonIgnore
     private Long age;
     private String location;
     private String email;

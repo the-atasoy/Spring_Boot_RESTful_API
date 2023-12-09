@@ -1,13 +1,20 @@
 package com.baris.demo.Controller;
 
 import com.baris.demo.Model.Employee;
+import com.baris.demo.Service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
+@RequestMapping("/Employee")
 public class EmployeeController {
+    @Autowired
+    private EmployeeService employeeService;
     @GetMapping("/getEmployee")
-    public String getEmployee() {
-        return "You see list of all employees.";
+    public List<Employee> getEmployee() {
+        return employeeService.getEmployees();
     }
 
     // getting data from client to server with path variable
