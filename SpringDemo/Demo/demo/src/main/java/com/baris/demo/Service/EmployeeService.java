@@ -1,39 +1,43 @@
 package com.baris.demo.Service;
 
 import com.baris.demo.Model.Employee;
+import com.baris.demo.Repository.IEmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class EmployeeService implements IEmployeeService{
-    private static final List<Employee> employees = new ArrayList<>();
-    static{
-        Employee e1 = new Employee();
-        Employee e2 = new Employee();
-        Employee e3 = new Employee();
-        e1.setAge(21L);
-        e1.setName("Baris Atasoy");
-        e1.setEmail("barisatasoy2917@gmail.com");
-        e1.setDepartment("Software Development");
-        e1.setLocation("Eskisehir");
-        employees.add(e1);
-        e2.setAge(20L);
-        e2.setName("Sevde Secer");
-        e2.setEmail("sevdeeseceer@gmail.com");
-        e2.setDepartment("Software Development");
-        e2.setLocation("Eskisehir");
-        employees.add(e2);
-        e3.setAge(30L);
-        e3.setName("Ali Veli");
-        e3.setEmail("aliveli@outlook.com");
-        e3.setDepartment("Accounting");
-        e3.setLocation("London");
-        employees.add(e3    );
-    }
+    @Autowired
+    private IEmployeeRepository repository;
     @Override
-    public List<Employee> getEmployees() {
-        return employees;
+    public List<Employee> getEmployee() {
+        return repository.findAll();
     }
+
+    @Override
+    public Optional<Employee> getEmployee(UUID id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public Employee updateEmployee(UUID id, Employee employee) {
+        employee.setId(id);
+        return repository.save(employee);
+    }
+
+    @Override
+    public void deleteEmployee(UUID id) {
+        repository.deleteById(id);
+    }
+
+    @Override
+    public Employee saveEmployee(Employee employee) {
+        return repository.save(employee);
+    }
+
+
 }
