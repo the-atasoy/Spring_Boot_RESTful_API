@@ -31,7 +31,7 @@ public class Employee {
     @Column
     private String location;
     @Column
-    @Email(message = "e-mail cannot be null!")
+    @Email(message = "invalid e-mail!")
     private String email;
     @Column
     private String department;
