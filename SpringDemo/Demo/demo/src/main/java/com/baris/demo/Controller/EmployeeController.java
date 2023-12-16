@@ -1,7 +1,7 @@
 package com.baris.demo.Controller;
 
 import com.baris.demo.Model.Employee;
-import com.baris.demo.Service.EmployeeService;
+import com.baris.demo.Service.Employee.EmployeeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,8 @@ public class EmployeeController {
     @Autowired
     private EmployeeService service;
     @GetMapping("/getEmployee")
-    public List<Employee> getEmployee() {
-        return service.getEmployee();
+    public List<Employee> getEmployee(@RequestParam int pageNumber, int pageSize) {
+        return service.getEmployee(pageNumber, pageSize);
     }
 
     // getting data from client to server with path variable
@@ -44,5 +44,25 @@ public class EmployeeController {
     @PutMapping("/updateEmployee/{id}")
     public Employee updateEmployee(@PathVariable UUID id, @RequestBody Employee employee){
         return service.updateEmployee(id, employee);
+    }
+
+    @GetMapping("/getEmployeeByName")
+    public List<Employee> getEmployeeByName(@RequestParam String name){
+        return service.getEmployeeByName(name);
+
+    }@GetMapping("/getEmployeeByNameAndAge")
+    public List<Employee> getEmployeeByName(@RequestParam String name, Long age){
+        return service.getEmployeeByNameAndAge(name, age);
+
+    }
+
+    @GetMapping("/getEmployeeByNameContaining")
+    public List<Employee> getEmployeeByNameContaining(@RequestParam String keyword){
+        return service.getEmployeeByNameContaining(keyword);
+    }
+
+    @GetMapping("/getEmployeeByNameOrLocation/{name}/{location}")
+    public List<Employee> getEmployeeByNameOrLocation(@PathVariable String name, @PathVariable String location){
+        return service.getEmployeeByNameOrLocation(name, location);
     }
 }

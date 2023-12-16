@@ -1,6 +1,5 @@
 package com.baris.demo.Model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +8,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,18 +21,24 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column
     private UUID id;
+
     @Column
     @NotNull(message = "name cannot be null!")
     private String name;
+
     @Column
     private Long age = 0L;
+
     @Column
     private String location;
+
     @Column
     @Email(message = "invalid e-mail!")
     private String email;
-    @Column
-    private String department;
+
+    @JoinColumn(name = "department_id")
+    @OneToOne
+    private Department department;
 
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
@@ -43,4 +47,5 @@ public class Employee {
     @UpdateTimestamp
     @Column
     private Date updatedAt;
+
 }
