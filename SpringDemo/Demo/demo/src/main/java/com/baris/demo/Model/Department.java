@@ -33,8 +33,5 @@ public class Department {
     @Column
     private Date updatedAt;
 
-    public void setName(Optional<String> name){
-        this.name = name.orElse(null);
-    }
 
 }

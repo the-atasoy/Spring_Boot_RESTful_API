@@ -35,7 +35,7 @@ public class DepartmentService implements IDepartmentService{
 
         if (departmentOptional.isPresent()) {
             Department department = departmentOptional.get();
-            if (dto.getName() != null) department.setName(Optional.of(dto.getName()));
+            if (dto.getName() != null) department.setName(dto.getName());
             return Optional.of(repository.save(department));
         } else return Optional.empty();
     }

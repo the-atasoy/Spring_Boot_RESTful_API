@@ -7,9 +7,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface IDepartmentService {
-    public List<Department> getDepartment();
-    public Optional<Department> getDepartment(UUID id);
-    public Optional<Department> updateDepartment(UUID id, DepartmentRequestDTO dto);
-    public void deleteDepartment(UUID id);
-    public Department saveDepartment(DepartmentRequestDTO dto);
+    List<Department> getDepartment();
+    Optional<Department> getDepartment(UUID id);
+    Optional<Department> updateDepartment(UUID id, DepartmentRequestDTO dto);
+    void deleteDepartment(UUID id);
+    Department saveDepartment(DepartmentRequestDTO dto);
 }

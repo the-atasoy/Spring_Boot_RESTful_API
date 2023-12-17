@@ -2,12 +2,8 @@ package com.baris.demo.Controller;
 
 import com.baris.demo.DTO.Department.DepartmentRequestDTO;
 import com.baris.demo.Model.Department;
-import com.baris.demo.Model.Employee;
 import com.baris.demo.Service.Department.DepartmentService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
