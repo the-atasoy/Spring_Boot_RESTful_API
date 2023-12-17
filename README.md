@@ -12,8 +12,6 @@ A demo RESTful API that consist of two entities named Employee and Department. I
 
 ### Note
 
-### Note
-
 **You do not need to create tables in the database if you have the database and the schema indicated in the `application.properties` file because of the `spring.jpa.hibernate.ddl-auto=update` line. This line provides auto-update and creation in the database when entities change.**
 
 
