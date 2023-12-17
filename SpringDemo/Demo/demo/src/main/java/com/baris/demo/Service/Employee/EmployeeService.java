@@ -1,6 +1,9 @@
 package com.baris.demo.Service.Employee;
 
+import com.baris.demo.DTO.Employee.EmployeeRequestDTO;
+import com.baris.demo.Model.Department;
 import com.baris.demo.Model.Employee;
+import com.baris.demo.Repository.IDepartmentRepository;
 import com.baris.demo.Repository.IEmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -14,53 +17,60 @@ import java.util.UUID;
 @Service
 public class EmployeeService implements IEmployeeService{
     @Autowired
-    private IEmployeeRepository repository;
+    private IEmployeeRepository employeeRepository;
+
+    @Autowired
+    private IDepartmentRepository departmentRepository;
     @Override
     public List<Employee> getEmployee(int pageNumber, int pageSize) {
         PageRequest pages = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC, "name");
-        return repository.findAll(pages).getContent();
+        return employeeRepository.findAll(pages).getContent();
     }
 
     @Override
     public Optional<Employee> getEmployee(UUID id) {
-        return repository.findById(id);
+        return Optional.ofNullable(employeeRepository.findById(id));
     }
 
     @Override
-    public Employee updateEmployee(UUID id, Employee employee) {
-        employee.setId(id);
-        return repository.save(employee);
+    public Employee updateEmployee(UUID id, EmployeeRequestDTO dto) {
+        Employee employee = employeeRepository.findById(id);
+        Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
+        employee.setDepartment(department);
+        return employeeRepository.save(employee);
     }
 
     @Override
     public void deleteEmployee(UUID id) {
-        repository.deleteById(id);
+        employeeRepository.deleteById(id);
     }
 
     @Override
-    public Employee saveEmployee(Employee employee) {
-        return repository.save(employee);
+    public Employee saveEmployee(EmployeeRequestDTO dto) {
+        Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
+        Employee employee = new Employee(dto.getName(), dto.getAge(), dto.getLocation(), dto.getEmail(), department.orElse(null));
+        return employeeRepository.save(employee);
     }
 
     @Override
     public List<Employee> getEmployeeByName(String name) {
-        return repository.findByName(name);
+        return employeeRepository.findByName(name);
     }
 
     @Override
     public List<Employee> getEmployeeByNameAndAge(String name, Long age) {
-        return repository.findByNameAndAge(name, age);
+        return employeeRepository.findByNameAndAge(name, age);
     }
 
     @Override
     public List<Employee> getEmployeeByNameContaining(String keyword) {
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
-        return repository.findByNameContaining(keyword, sort);
+        return employeeRepository.findByNameContaining(keyword, sort);
     }
 
     @Override
     public List<Employee> getEmployeeByNameOrLocation(String name, String location) {
-        return repository.getByNameOrLocation(name, location);
+        return employeeRepository.getByNameOrLocation(name, location);
     }
 
 

@@ -1,7 +1,7 @@
 package com.baris.demo.Service.Department;
 
+import com.baris.demo.DTO.Department.DepartmentRequestDTO;
 import com.baris.demo.Model.Department;
-import com.baris.demo.Model.Employee;
 import com.baris.demo.Repository.IDepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ public class DepartmentService implements IDepartmentService{
     }
 
     @Override
-    public Department updateDepartment(UUID id, Department department) {
-        department.setId(id);
+    public Department updateDepartment(UUID id, DepartmentRequestDTO dto) {
+        Department department = new Department(id, dto.getName());
         return repository.save(department);
     }
 
@@ -37,7 +37,8 @@ public class DepartmentService implements IDepartmentService{
     }
 
     @Override
-    public Department saveDepartment(Department department) {
+    public Department saveDepartment(DepartmentRequestDTO dto) {
+        Department department = new Department(dto.getName());
         return repository.save(department);
     }
 }

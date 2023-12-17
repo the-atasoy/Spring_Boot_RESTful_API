@@ -1,5 +1,6 @@
 package com.baris.demo.Controller;
 
+import com.baris.demo.DTO.Department.DepartmentRequestDTO;
 import com.baris.demo.Model.Department;
 import com.baris.demo.Model.Employee;
 import com.baris.demo.Service.Department.DepartmentService;
@@ -34,12 +35,12 @@ public class DepartmentController {
     }
 
     @PostMapping("/saveDepartment")
-    public Department saveDepartment(@RequestBody Department department){
-        return service.saveDepartment(department);
+    public Department saveDepartment(@RequestBody DepartmentRequestDTO dto){
+        return service.saveDepartment(dto);
     }
 
     @PutMapping("/updateDepartment/{id}")
-    public Department updateDepartment(@PathVariable UUID id, @RequestBody Department department){
-        return service.updateDepartment(id, department);
+    public Department updateDepartment(@PathVariable UUID id, @RequestBody DepartmentRequestDTO dto){
+        return service.updateDepartment(id, dto);
     }
 }

@@ -1,5 +1,6 @@
 package com.baris.demo.Controller;
 
+import com.baris.demo.DTO.Employee.EmployeeRequestDTO;
 import com.baris.demo.Model.Employee;
 import com.baris.demo.Service.Employee.EmployeeService;
 import jakarta.validation.Valid;
@@ -36,14 +37,14 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody Employee employee){
+    public ResponseEntity<Employee> saveEmployee(@Valid @RequestBody EmployeeRequestDTO dto){
         // ResponseEntity should be used to specify HTTP status.
-        return new ResponseEntity<>(service.saveEmployee(employee), HttpStatus.CREATED);
+        return new ResponseEntity<>(service.saveEmployee(dto), HttpStatus.CREATED);
     }
 
     @PutMapping("/updateEmployee/{id}")
-    public Employee updateEmployee(@PathVariable UUID id, @RequestBody Employee employee){
-        return service.updateEmployee(id, employee);
+    public Employee updateEmployee(@PathVariable UUID id, @RequestBody EmployeeRequestDTO dto){
+        return service.updateEmployee(id, dto);
     }
 
     @GetMapping("/getEmployeeByName")

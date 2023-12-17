@@ -18,7 +18,7 @@ public interface IEmployeeRepository extends PagingAndSortingRepository<Employee
 
     List<Employee> findByNameContaining(String keyword, Sort sort);
     
-    Optional<Employee> findById(UUID id);
+    Employee findById(UUID id);
 
     Employee save(Employee employee);
 

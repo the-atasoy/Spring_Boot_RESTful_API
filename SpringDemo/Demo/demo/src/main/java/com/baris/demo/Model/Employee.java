@@ -9,6 +9,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -36,8 +37,8 @@ public class Employee {
     @Email(message = "invalid e-mail!")
     private String email;
 
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
-    @OneToOne
     private Department department;
 
     @CreationTimestamp
@@ -48,4 +49,21 @@ public class Employee {
     @Column
     private Date updatedAt;
 
+    public Employee(String name, Long age, String location, String email, Department department) {
+        this.name = name;
+        this.age = age;
+        this.location = location;
+        this.email = email;
+        this.department = department;
+    }
+
+    public Employee() {
+
+    }
+
+    public void setDepartment(Optional<Department> department){
+        // Set the entity's department
+        // Set the entity's department to null
+        this.department = department.orElse(null);
+    }
 }

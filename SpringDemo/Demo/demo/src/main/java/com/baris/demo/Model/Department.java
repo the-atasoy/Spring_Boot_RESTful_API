@@ -1,10 +1,13 @@
 package com.baris.demo.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -19,4 +22,23 @@ public class Department {
     private UUID id;
     @Column
     private String name;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Column
+    private Date updatedAt;
+
+    public Department(String name){
+        this.name = name;
+    }
+    public Department(UUID id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public Department(){
+
+    }
 }
