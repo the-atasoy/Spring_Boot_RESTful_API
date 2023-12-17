@@ -26,4 +26,6 @@ public interface IEmployeeRepository extends PagingAndSortingRepository<Employee
 
     @Query("FROM Employee WHERE name = :name OR location = :location")
     List<Employee> getByNameOrLocation(String name, String location);
+
+    List<Employee> findByDepartmentName(String name);
 }

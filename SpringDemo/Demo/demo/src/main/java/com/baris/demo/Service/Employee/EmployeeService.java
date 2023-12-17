@@ -73,5 +73,10 @@ public class EmployeeService implements IEmployeeService{
         return employeeRepository.getByNameOrLocation(name, location);
     }
 
+    @Override
+    public List<Employee> getEmployeeByDepartment(String name) {
+        return employeeRepository.findByDepartmentName(name);
+    }
+
 
 }

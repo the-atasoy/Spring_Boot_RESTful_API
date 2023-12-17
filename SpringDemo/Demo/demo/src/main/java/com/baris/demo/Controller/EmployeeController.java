@@ -66,4 +66,9 @@ public class EmployeeController {
     public List<Employee> getEmployeeByNameOrLocation(@PathVariable String name, @PathVariable String location){
         return service.getEmployeeByNameOrLocation(name, location);
     }
+
+    @GetMapping("/getEmployeeByDepartment")
+    public List<Employee> getEmployeeByDepartment(@RequestParam String name){
+        return service.getEmployeeByDepartment(name);
+    }
 }

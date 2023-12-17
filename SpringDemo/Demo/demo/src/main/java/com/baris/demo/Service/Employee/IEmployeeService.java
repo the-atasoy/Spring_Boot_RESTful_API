@@ -18,4 +18,5 @@ public interface IEmployeeService
     List<Employee> getEmployeeByNameAndAge(String name, Long age);
     List<Employee> getEmployeeByNameContaining(String keyword);
     List<Employee> getEmployeeByNameOrLocation(String name, String location);
+    List<Employee> getEmployeeByDepartment(String name);
 }
