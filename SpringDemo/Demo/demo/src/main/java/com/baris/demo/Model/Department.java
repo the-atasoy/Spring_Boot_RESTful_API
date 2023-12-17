@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -20,8 +21,10 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column
     private UUID id;
+
     @Column
     private String name;
+
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private Date createdAt;
@@ -30,15 +33,8 @@ public class Department {
     @Column
     private Date updatedAt;
 
-    public Department(String name){
-        this.name = name;
-    }
-    public Department(UUID id, String name){
-        this.id = id;
-        this.name = name;
+    public void setName(Optional<String> name){
+        this.name = name.orElse(null);
     }
 
-    public Department(){
-
-    }
 }

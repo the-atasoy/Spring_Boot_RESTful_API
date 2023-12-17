@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface IDepartmentService {
     public List<Department> getDepartment();
     public Optional<Department> getDepartment(UUID id);
-    public Department updateDepartment(UUID id, DepartmentRequestDTO dto);
+    public Optional<Department> updateDepartment(UUID id, DepartmentRequestDTO dto);
     public void deleteDepartment(UUID id);
     public Department saveDepartment(DepartmentRequestDTO dto);
 }

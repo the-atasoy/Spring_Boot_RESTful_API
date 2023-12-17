@@ -9,11 +9,11 @@ import java.util.UUID;
 
 public interface IEmployeeService
 {
-    public List<Employee> getEmployee(int pageNumber, int pageSize);
-    public Optional<Employee> getEmployee(UUID id);
-    public Employee updateEmployee(UUID id, EmployeeRequestDTO dto);
-    public void deleteEmployee(UUID id);
-    public Employee saveEmployee(EmployeeRequestDTO dto);
+    List<Employee> getEmployee(int pageNumber, int pageSize);
+    Optional<Employee> getEmployee(UUID id);
+    Employee updateEmployee(UUID id, EmployeeRequestDTO dto);
+    void deleteEmployee(UUID id);
+    Employee saveEmployee(EmployeeRequestDTO dto);
     List<Employee> getEmployeeByName(String name);
     List<Employee> getEmployeeByNameAndAge(String name, Long age);
     List<Employee> getEmployeeByNameContaining(String keyword);

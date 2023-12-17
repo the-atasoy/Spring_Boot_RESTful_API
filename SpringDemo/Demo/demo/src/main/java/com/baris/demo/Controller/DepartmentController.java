@@ -40,7 +40,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/updateDepartment/{id}")
-    public Department updateDepartment(@PathVariable UUID id, @RequestBody DepartmentRequestDTO dto){
+    public Optional<Department> updateDepartment(@PathVariable UUID id, @RequestBody DepartmentRequestDTO dto){
         return service.updateDepartment(id, dto);
     }
 }

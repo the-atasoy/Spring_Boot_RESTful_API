@@ -5,6 +5,7 @@ import com.baris.demo.Model.Department;
 import com.baris.demo.Model.Employee;
 import com.baris.demo.Repository.IDepartmentRepository;
 import com.baris.demo.Repository.IEmployeeRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,8 +17,12 @@ import java.util.UUID;
 
 @Service
 public class EmployeeService implements IEmployeeService{
+
     @Autowired
     private IEmployeeRepository employeeRepository;
+
+    @Autowired
+    private ModelMapper mapper;
 
     @Autowired
     private IDepartmentRepository departmentRepository;
@@ -36,7 +41,11 @@ public class EmployeeService implements IEmployeeService{
     public Employee updateEmployee(UUID id, EmployeeRequestDTO dto) {
         Employee employee = employeeRepository.findById(id);
         Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
-        employee.setDepartment(department);
+        if(dto.getDepartmentId() != null) employee.setDepartment(department);
+        if(dto.getName() != null) employee.setName(dto.getName());
+        if(dto.getAge() != null) employee.setAge(dto.getAge());
+        if(dto.getLocation() != null) employee.setLocation(dto.getLocation());
+        if(dto.getEmail() != null) employee.setEmail(dto.getEmail());
         return employeeRepository.save(employee);
     }
 
@@ -48,7 +57,8 @@ public class EmployeeService implements IEmployeeService{
     @Override
     public Employee saveEmployee(EmployeeRequestDTO dto) {
         Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
-        Employee employee = new Employee(dto.getName(), dto.getAge(), dto.getLocation(), dto.getEmail(), department.orElse(null));
+        Employee employee = mapper.map(dto, Employee.class);
+        employee.setDepartment(department);
         return employeeRepository.save(employee);
     }
 

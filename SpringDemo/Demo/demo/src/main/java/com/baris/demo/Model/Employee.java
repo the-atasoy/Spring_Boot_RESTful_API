@@ -28,7 +28,7 @@ public class Employee {
     private String name;
 
     @Column
-    private Long age = 0L;
+    private Long age;
 
     @Column
     private String location;
@@ -48,18 +48,6 @@ public class Employee {
     @UpdateTimestamp
     @Column
     private Date updatedAt;
-
-    public Employee(String name, Long age, String location, String email, Department department) {
-        this.name = name;
-        this.age = age;
-        this.location = location;
-        this.email = email;
-        this.department = department;
-    }
-
-    public Employee() {
-
-    }
 
     public void setDepartment(Optional<Department> department){
         // Set the entity's department
