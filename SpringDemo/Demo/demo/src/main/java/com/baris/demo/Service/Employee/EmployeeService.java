@@ -40,8 +40,10 @@ public class EmployeeService implements IEmployeeService{
     @Override
     public Employee updateEmployee(UUID id, EmployeeRequestDTO dto) {
         Employee employee = employeeRepository.findById(id);
-        Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
-        if(dto.getDepartmentId() != null) employee.setDepartment(department);
+        if(dto.getDepartmentId() != null){
+            Optional<Department> department = departmentRepository.findById(dto.getDepartmentId());
+            employee.setDepartment(department);
+        }
         if(dto.getName() != null) employee.setName(dto.getName());
         if(dto.getAge() != null) employee.setAge(dto.getAge());
         if(dto.getLocation() != null) employee.setLocation(dto.getLocation());
